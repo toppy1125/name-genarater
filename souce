@@ -1,0 +1,59 @@
+import random
+
+# 各属性に対応する文章のリストを用意する
+item_patterns = [
+    '貴重な', '不思議な', '神秘的な'
+]
+
+weapon_patterns = [
+    '伝説的な', '強力な', '古の'
+]
+
+monster_patterns = [
+    '凶暴な', '邪悪な', '巨大な'
+]
+
+person_patterns = [
+    '伝説的な', '神出鬼没の', '最強の'
+]
+
+town_patterns = [
+    '賑やかな', '静かな', '産業都市の'
+]
+
+# 詳細を生成する関数を定義する
+def generate_detail(attribute):
+    # 各部分をランダムに選択する
+    a = ''
+    b = ''
+    if attribute == 'アイテム':
+        a = random.choice(item_patterns)
+        b = random.choice(['剣', '槍', '弓', '斧', '石', '宝石', 'アーティファクト'])
+    elif attribute == '武器':
+        a = random.choice(weapon_patterns)
+        b = random.choice(['剣', '槍', '弓', '斧'])
+    elif attribute == 'モンスター':
+        a = random.choice(monster_patterns)
+        b = random.choice(['怪物', '獣', 'ドラゴン', '魔物'])
+    elif attribute == '人物':
+        a = random.choice(person_patterns)
+        b = random.choice(['剣士', '魔法使い', '冒険家', '勇者'])
+    elif attribute == '街':
+        a = random.choice(town_patterns)
+        b = random.choice(['城下町', '商業都市', '港町'])
+    c = random.choice(['古代の', '伝説の', '神話の', '遠い昔'])
+    d = random.choice(['王家', '英雄', '魔法使い', '戦い', 'ドワーフ族'])
+    e = random.choice(['受け継がれた', '創りだしたとされる', '授けたと伝えられている'])
+    # 詳細を組み立てる
+    detail = f'{a}の{b}。{c}{d}から{e}。'
+    return detail
+
+# ユーザーからの入力を受け取り、召喚結果を出力する
+while True:
+    word = input('呪文を入力してください（1~10文字）：')
+    if len(word) < 1 or len(word) > 10 or not word.isalnum():
+        print('入力が不正です。英数字のみで1~10文字の長さで入力してください。')
+    else:
+        summoning_result = generate_summoning(word)
+        detail = generate_detail(summoning_result['attribute'])
+        print(f'{word}の召喚結果：\n名前：{summoning_result["name"]}\n属性：{summoning_result["attribute"]}\n詳細：{detail}')
